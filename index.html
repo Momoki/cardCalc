@@ -41,7 +41,7 @@
 
     .wrap table input {
       -webkit-appearance: none;
-      width: 90%;
+      width: 80%;
       border: 1px solid #625f5f;
       line-height: 1.6;
       text-align: center;
@@ -99,20 +99,20 @@
         </tr>
         <tr id="coefficient">
           <th>权重</th>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
         </tr>
       </thead>
       <tbody id="cardlist">
         <tr id="card_1">
           <th>卡牌1</th>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*"></td>
-          <td><input type="number" pattern="\d*" class="total" readonly></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel" class="total" readonly></td>
         </tr>
       </tbody>
     </table>
@@ -133,10 +133,10 @@
   function addCard(id) {
     let html = '<tr id="card_' + id + '">' +
       '<th>卡牌' + id + '</th>' +
-      '<td><input type="text" class="v_0"></td>' +
-      '<td><input type="text" class="v_1"></td>' +
-      '<td><input type="text" class="v_2"></td>' +
-      '<td><input type="text" class="v_3"></td>' +
+      '<td><input type="text"></td>' +
+      '<td><input type="text"></td>' +
+      '<td><input type="text"></td>' +
+      '<td><input type="text"></td>' +
       '<td><input type="text" class="total" readonly></td>' +
       '</tr>'
     $("#cardlist").append(html)
