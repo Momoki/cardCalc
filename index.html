@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    html,
+    body {
+      margin: 0
+    }
+
+    .wrap {
+      margin: 0 auto;
+      width: 96%;
+      padding-bottom: 20px;
+      max-width: 600px;
+      box-shadow: 0 0 10px 0px #c1e4f5;
+    }
+
+    .wrap h2 {
+      padding-top: 20px;
+      text-align: center;
+      font-size: 16px;
+      color: #b3a6f7;
+    }
+
+    .wrap table {
+      font-size: 16px;
+      padding: 1%;
+    }
+
+    .wrap table th {
+      font-size: 14px;
+      font-weight: normal;
+    }
+
+    input {
+      width: 100%;
+      color: #4c4c4c;
+    }
+    .wrap-button{
+      text-align: center;
+    }
+    .wrap-button button{
+      margin: 10px auto;
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      height: 36px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background: transparent;
+    }
+    .wrap-button button.btn-add{
+      border-color: #383ac3;
+      color: #383ac3;
+    }
+    .wrap-button button.btn-calc{
+      border-color: #0c48b0;
+      color: #0c48b0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h2>自助卡牌计算器</h2>
+    <!-- 关卡选择 -->
+    <table>
+      <thead>
+        <tr>
+          <th width="15%"></th>
+          <th width="17%" style="color: #66b1e3;">
+            决策力
+          </th>
+          <th width="17%" style="color: #fbb48f;">
+            创造力
+          </th>
+          <th width="17%" style="color: #fe9fbc;">
+            亲和力
+          </th>
+          <th width="17%" style="color: #bbd3b8;">
+            行动力
+          </th>
+          <th width="17%" style="color: ##686666;">
+            综合分
+          </th>
+        </tr>
+        </tr>
+        <tr id="coefficient">
+          <th>权重</th>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+        </tr>
+      </thead>
+      <tbody id="cardlist">
+        <tr id="card_1">
+          <th>卡牌1</th>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel"></td>
+          <td><input type="tel" class="total" readonly></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="wrap-button">
+      <button class="btn-add" id="addCardButton">添加卡牌</button>
+      <button class="btn-calc" id="calcButton">计算</button>
+    </div>
+  </div>
+
+</body>
+<script src="j/jquery-3.2.1.min.js"></script>
+<script>
+  let cardid = 1;
+  $("#addCardButton").on("click", function() {
+    addCard(++cardid)
+  })
+
+  function addCard(id) {
+    let html = '<tr id="card_' + id + '">' +
+      '<th>卡牌' + id + '</th>' +
+      '<td><input type="text" class="v_0"></td>' +
+      '<td><input type="text" class="v_1"></td>' +
+      '<td><input type="text" class="v_2"></td>' +
+      '<td><input type="text" class="v_3"></td>' +
+      '<td><input type="text" class="total" readonly></td>' +
+      '</tr>'
+    $("#cardlist").append(html)
+  }
+  $("#calcButton").on("click", function() {
+    let c = getNum($("#coefficient"));
+    let list = $("#cardlist").children("tr")
+    for (let i = 0; i < list.length; i++) {
+      let one = list.eq(i);
+      let n = getNum(one)
+      one.find(".total").eq(0).val(calc(c, n))
+    }
+  })
+
+  function getNum(e) {
+    let arr = [];
+    let a = e.find("input");
+    for (let i = 0; i < a.length; i++) {
+      arr.push(a.eq(i).val());
+    }
+    return arr;
+  }
+
+  function calc(c, v) {
+    let total = 0;
+    for (let i = 0; i < c.length; i++) {
+      total += c[i] * v[i];
+    }
+    return total;
+  }
+</script>
+
+</html>
